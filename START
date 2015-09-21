@@ -1,0 +1,1 @@
+./bin/domain.sh -b 192.168.1.205 -bmanagement=192.168.1.205
