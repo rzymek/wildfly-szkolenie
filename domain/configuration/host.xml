@@ -88,24 +88,9 @@
     </jvms>
 
     <servers>
-        <server name="server-one" group="main-server-group">
-            <!-- Remote JPDA debugging for a specific server
-            <jvm name="default">
-              <jvm-options>
-                <option value="-agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n"/>
-              </jvm-options>
-           </jvm>
-           -->
-        </server>
-        <server name="server-two" group="main-server-group" auto-start="true">
-            <!-- server-two avoids port conflicts by incrementing the ports in
-                 the default socket-group declared in the server-group -->
+        <server name="rzymek1_1" group="main-server-group"/>
+        <server name="rzymek2_1" group="other-server-group">
             <socket-bindings port-offset="150"/>
-        </server>
-        <server name="server-three" group="other-server-group" auto-start="false">
-            <!-- server-three avoids port conflicts by incrementing the ports in
-                 the default socket-group declared in the server-group -->
-            <socket-bindings port-offset="250"/>
         </server>
     </servers>
     
