@@ -7,11 +7,11 @@
 
     <management>
         <security-realms>
-            <server-identitities>
-		<secret value="YWRtaW4=" />
-            </server-identitities>
             <security-realm name="ManagementRealm">
-                <authentication>
+       <server-identities>
+		<secret value="YWRtaW4=" />
+      </server-identities>
+               <authentication>
                     <local default-user="$local" skip-group-loading="true"/>
                     <properties path="mgmt-users.properties" relative-to="jboss.domain.config.dir"/>
                 </authentication>
@@ -89,7 +89,7 @@
 
     <servers>
         <server name="rzymek1_1" group="main-server-group"/>
-        <server name="rzymek2_1" group="other-server-group">
+        <server name="rzymek1_2" group="other-server-group">
             <socket-bindings port-offset="150"/>
         </server>
     </servers>
