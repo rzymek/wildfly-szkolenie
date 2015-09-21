@@ -7,6 +7,9 @@
 
     <management>
         <security-realms>
+            <server-identitities>
+		<secret value="YWRtaW4=" />
+            </server-identitities>
             <security-realm name="ManagementRealm">
                 <authentication>
                     <local default-user="$local" skip-group-loading="true"/>
