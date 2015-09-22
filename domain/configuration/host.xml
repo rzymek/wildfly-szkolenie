@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
 <host name="rzymek_1" xmlns="urn:jboss:domain:3.0">
+
     <extensions>
         <extension module="org.jboss.as.jmx"/>
     </extensions>
-
     <management>
         <security-realms>
             <security-realm name="ManagementRealm">
-       <server-identities>
-		<secret value="YWRtaW4=" />
-      </server-identities>
-               <authentication>
+                <server-identities>
+                    <secret value="YWRtaW4="/>
+                </server-identities>
+                <authentication>
                     <local default-user="$local" skip-group-loading="true"/>
                     <properties path="mgmt-users.properties" relative-to="jboss.domain.config.dir"/>
                 </authentication>
@@ -34,8 +34,8 @@
                 <json-formatter name="json-formatter"/>
             </formatters>
             <handlers>
-                <file-handler name="host-file" formatter="json-formatter" relative-to="jboss.domain.data.dir" path="audit-log.log"/>
-                <file-handler name="server-file" formatter="json-formatter" relative-to="jboss.server.data.dir" path="audit-log.log"/>
+                <file-handler name="host-file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.domain.data.dir"/>
+                <file-handler name="server-file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.server.data.dir"/>
             </handlers>
             <logger log-boot="true" log-read-only="false" enabled="false">
                 <handlers>
@@ -59,8 +59,7 @@
     </management>
 
     <domain-controller>
-        <!-- Alternative remote domain controller configuration with a host and port -->
-        <remote protocol="remote" host="${jboss.domain.master.address}" port="${jboss.domain.master.port:9999}" security-realm="ManagementRealm" username="master" /> 
+        <remote protocol="remote" host="${jboss.domain.master.address}" port="${jboss.domain.master.port:9999}" security-realm="ManagementRealm" username="master"/>
     </domain-controller>
 
     <interfaces>
@@ -71,8 +70,6 @@
             <inet-address value="${jboss.bind.address:127.0.0.1}"/>
         </interface>
         <interface name="unsecure">
-            <!-- Used for IIOP sockets in the standard configuration.
-                 To secure JacORB you need to setup SSL -->
             <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
         </interface>
     </interfaces>
@@ -88,12 +85,13 @@
     </jvms>
 
     <servers>
-        <server name="rzymek1_1" group="main-server-group"/>
-        <server name="rzymek1_2" group="other-server-group">
-            <socket-bindings port-offset="150"/>
+        <server name="rzymek1_1" group="main-server-group" auto-start="false">
+            <socket-bindings socket-binding-group="full-ha-sockets" port-offset="0"/>
         </server>
-    </servers>
-    
+        <server name="rzymek1_2" group="other-server-group" auto-start="false">
+            <socket-bindings socket-binding-group="full-ha-sockets" port-offset="150"/>
+        </server>
+</servers>
     <profile>
         <subsystem xmlns="urn:jboss:domain:jmx:1.3">
             <expose-resolved-model/>
