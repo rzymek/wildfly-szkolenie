@@ -1,0 +1,50 @@
+#! /bin/sh
+#
+# Created by configure
+
+"./configure" \
+"--enable-layout=Apache" \
+"--with-included-apr" \
+"--prefix=/opt/jboss/httpd/httpd" \
+"--exec-prefix=/opt/jboss/httpd" \
+"--bindir=/opt/jboss/httpd/bin" \
+"--sbindir=/opt/jboss/httpd/sbin" \
+"--mandir=/opt/jboss/httpd/man" \
+"--libdir=/opt/jboss/httpd/lib" \
+"--sysconfdir=/opt/jboss/httpd/httpd/conf" \
+"--includedir=/opt/jboss/httpd/include/httpd" \
+"--libexecdir=/opt/jboss/httpd/lib/httpd/modules" \
+"--datadir=/opt/jboss/httpd/htdocs" \
+"--with-installbuilddir=/opt/jboss/httpd/lib/httpd/build" \
+"--with-mpm=prefork" \
+"--enable-suexec" \
+"--with-suexec" \
+"--with-suexec-caller=/opt/jboss/httpd/bin/suexec" \
+"--with-suexec-docroot=/opt/jboss/httpd/htdocs" \
+"--with-suexec-logfile=/opt/jboss/httpd/logs/log/httpd/suexec.log" \
+"--with-suexec-bin=/opt/jboss/httpd/sbin/suexec" \
+"--with-suexec-uidmin=500" \
+"--with-suexec-gidmin=100" \
+"--enable-mods-shared=all" \
+"--with-ssl=/mnt/hudson_workspace/workspace/mod_cluster-linux-x86_64/jbossnative/build/unix/cache/common/linux2-x64" \
+"--enable-ssl" \
+"--enable-proxy-cluster" \
+"--enable-advertise" \
+"--enable-cluster-slotmem" \
+"--enable-manager" \
+"--disable-proxy-balancer" \
+"--enable-bmx" \
+"--enable-bmx-vhost" \
+"--enable-bmx-status" \
+"--with-expat=builtin" \
+"--with-pcre=/mnt/hudson_workspace/workspace/mod_cluster-linux-x86_64/jbossnative/build/unix/cache/common/linux2-x64-static/" \
+"--enable-pie" \
+"--enable-proxy" \
+"--enable-cache" \
+"--enable-mem-cache" \
+"--enable-file-cache" \
+"--enable-disk-cache" \
+"--enable-cgid" \
+"--enable-authn-anon" \
+"--enable-authn-alias" \
+"$@"
