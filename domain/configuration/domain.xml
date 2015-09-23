@@ -1427,7 +1427,7 @@
                 </hornetq-server>
             </subsystem>
             <subsystem xmlns="urn:jboss:domain:modcluster:2.0">
-                <mod-cluster-config advertise-socket="modcluster" connector="ajp">
+                <mod-cluster-config advertise-socket="modcluster" proxies="balancer" proxy-url="/" balancer="mybalancer" advertise="false" connector="ajp">
                     <dynamic-load-provider>
                         <load-metric type="cpu"/>
                     </dynamic-load-provider>
@@ -1536,6 +1536,9 @@
             <outbound-socket-binding name="mail-smtp">
                 <remote-destination host="localhost" port="25"/>
             </outbound-socket-binding>
+            <outbound-socket-binding name="balancer">
+                <remote-destination host="192.168.1.202" port="6666"/>
+            </outbound-socket-binding>
         </socket-binding-group>
         <socket-binding-group name="ha-sockets" default-interface="public">
             <socket-binding name="ajp" port="${jboss.ajp.port:8009}"/>
@@ -1582,12 +1585,24 @@
             <outbound-socket-binding name="mail-smtp">
                 <remote-destination host="localhost" port="25"/>
             </outbound-socket-binding>
+            <outbound-socket-binding name="balancer">
+                <remote-destination host="192.168.1.169" port="6666"/>
+            </outbound-socket-binding>
         </socket-binding-group>
     </socket-binding-groups>
 
     <deployments>
-        <deployment name="HelloEjb.jar" runtime-name="HelloEjb.jar">
-            <content sha1="12ec6e413946360dde4cccbabceaf32d62b40144"/>
+        <deployment name="HelloWorld.war" runtime-name="HelloWorld.war">
+            <content sha1="573dc086c1f92969bf32992285e947d33e85923f"/>
+        </deployment>
+        <deployment name="c.war" runtime-name="c.war">
+            <content sha1="bf5a188d2e690f40676dc667bba3e600a4befadd"/>
+        </deployment>
+        <deployment name="test.war" runtime-name="test.war">
+            <content sha1="0be11a9084afa40902e24913ebd7543e18ca84e9"/>
+        </deployment>
+        <deployment name="clustering-demo.war" runtime-name="clustering-demo.war">
+            <content sha1="c48171a88ee347499593210f14b8efd6a17bf306"/>
         </deployment>
     </deployments>
 
@@ -1597,12 +1612,18 @@
                 <heap size="64m" max-size="512m"/>
             </jvm>
             <socket-binding-group ref="full-ha-sockets"/>
+            <deployments>
+                <deployment name="clustering-demo.war" runtime-name="clustering-demo.war"/>
+            </deployments>
         </server-group>
         <server-group name="other-server-group" profile="full-ha">
             <jvm name="default">
                 <heap size="64m" max-size="512m"/>
             </jvm>
             <socket-binding-group ref="full-ha-sockets"/>
+            <deployments>
+                <deployment name="HelloWorld.war" runtime-name="HelloWorld.war"/>
+            </deployments>
         </server-group>
     </server-groups>
 
