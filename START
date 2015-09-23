@@ -1,1 +1,2 @@
-./bin/domain.sh -b 192.168.1.201 -Djboss.domain.master.address=192.168.1.205 -bmanagement=192.168.1.201 
+
+~/opt/wildfly/bin/domain.sh -b 192.168.1.201 -Djboss.domain.master.address=192.168.1.205 -bmanagement=192.168.1.201 
